@@ -1,0 +1,11 @@
+set font "Mononoki Nerd Font 12"
+set default-bg "#1d1f21"
+
+set statusbar-bg "#969896"
+set statusbar-fg "#1d1f21"
+
+set window-title-home-tilde true
+set statusbar-basename true
+set selection-clipboard clipboard
+
+map b toggle_statusbar

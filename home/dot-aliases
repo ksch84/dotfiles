@@ -1,0 +1,14 @@
+# Git
+alias gs="git status"
+alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset)%C(bold red)%d%C(reset) %s %C(dim green)(%an, %ar)%C(reset)'"
+alias gla="git log --graph --abbrev-commit --decorate --all --format=format:'%C(bold blue)%h%C(reset)%C(bold red)%d%C(reset) %s %C(dim green)(%an, %ar)%C(reset)'"
+alias gp="git push"
+
+# K8s
+alias k=kubectl
+
+alias ll="ls -l"
+alias l="ls -la"
+alias top="htop"
+alias ..="cd .."
+alias ...="cd ../.."

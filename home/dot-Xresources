@@ -1,0 +1,28 @@
+! EVERFOREST
+URxvt*background: #232a2e 
+URxvt*foreground: #d3c6aa
+URxvt*color0: #7a8478
+URxvt*color1: #e67e80 
+URxvt*color2: #a7c080
+URxvt*color3: #dbbc7f
+URxvt*color4: #7fbbb3
+URxvt*color5: #d699b6
+URxvt*color6: #83c092
+URxvt*color7: #d3c6aa
+URxvt*color8: #7a8478
+URxvt*color9: #e67e80
+URxvt*color10: #a7c080
+URxvt*color11: #dbbc7f
+URxvt*color12: #7fbbb3
+URxvt*color13: #d699b6
+URxvt*color14: #83c092
+URxvt*color15: #d3c6aa
+URxvt*cursorColor: #d0d0d0
+URxvt*cursorColor2: #3a3a3a
+URxvt*colorBD: #e4e4e4
+URxvt.font: xft:Mononoki Nerd Font Mono:style=Regular:size=12
+URxvt.boldFont: xft:Mononoki Nerd Font Mono:style=Bold:size=12
+URxvt.italicFont: xft:Mononoki Nerd Font Mono:style=Italic:size=12
+URxvt.boldItalicFont: xft:Mononoki Nerd Font Mono:style=Bold Italic:size=12
+URxvt.scrollBar: false
+URxvt*internalBorder: 25

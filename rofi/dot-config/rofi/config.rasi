@@ -1,0 +1,85 @@
+configuration {
+display-drun: "";
+display-window: "";
+drun-display-format: "{name}";
+font: "Mononoki Nerd Font Mono 10";
+location: 0;
+modi: "window,drun,run";
+show-icons: false;
+sidebar-mode: false;
+xoffset: 0;
+yoffset: 0;
+}
+@theme "/dev/null"
+
+* {
+background-color: @bg;
+bg: #232A2E;
+button: #2D353B;
+fg: #c5c8c6;
+text-color: @fg;
+}
+
+element {
+border-radius: 0%;
+orientation: vertical;
+padding: 1.5% 0% 1.5% 1.5%;
+}
+
+element selected {
+background-color: #A7C080;
+border-radius: 6px;
+text-color: @bg;
+}
+
+element-text {
+background-color: inherit;
+expand: true;
+margin: 0.5% 3% 0% 3%;
+text-color: inherit;
+vertical-align: 0.5;
+}
+
+entry {
+background-color: @button;
+expand: true;
+padding: 5px 2% 5px 2%;
+placeholder: "";
+placeholder-color: @fg;
+}
+
+inputbar {
+background-color: @button;
+border-radius: 6px;
+children: [ prompt,entry ];
+expand: false;
+padding: 8px;
+text-color: @fg;
+}
+
+listview {
+columns: 1;
+cycle: false;
+dynamic: true;
+layout: vertical;
+lines: 5;
+}
+
+mainbox {
+children: [ inputbar,listview ];
+padding: 2% 1% 2% 1%;
+spacing: 2%;
+}
+
+prompt {
+enabled: false;
+}
+
+window {
+location: center;
+padding: 1px;
+transparency: "real";
+width: 20%;
+y-offset: 1px;
+}
+
