@@ -1,0 +1,6 @@
+*.db
+*.log
+*.pid
+mpdstate
+playlists
+lyrics
