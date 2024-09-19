@@ -12,3 +12,5 @@ alias l="ls -la"
 alias top="htop"
 alias ..="cd .."
 alias ...="cd ../.."
+
+alias pdf=okular
