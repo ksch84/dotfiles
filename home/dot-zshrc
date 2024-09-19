@@ -4,16 +4,18 @@ fi
 
 
 autoload -U compaudit compinit
-source .aliases
+source ~/.aliases
+export GOPATH=~/go
 export PATH=$GOPATH/bin:/usr/local/bin:$PATH
 export PF_INFO="ascii os host kernel uptime pkgs shell wm memory"
 export EDITOR="vim"
+export PODMAN_IGNORE_CGROUPSV1_WARNING=true
 
 autoload -Uz add-zsh-hook vcs_info
 setopt prompt_subst
 add-zsh-hook precmd vcs_info
 
-PROMPT=' %(?.%F{blue}.%F{red})%f %B%F{cyan}%3~%f%b ${vcs_info_msg_0_} '
+PROMPT=' %(?.%F{blue}.%F{red}) %F{red}%n%f %B%F{cyan}%3~%f%b ${vcs_info_msg_0_} '
 # Sequences:
 #
 # %b current branch
