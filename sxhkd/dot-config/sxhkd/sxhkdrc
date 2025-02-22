@@ -6,7 +6,7 @@
 super + Return
 	urxvt
 super + b
-	firefox
+	$HOME/mullvad-browser/Browser/start-mullvad-browser
 
 super + p
 	scrot
