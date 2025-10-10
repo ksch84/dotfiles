@@ -14,7 +14,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 
 alias pdf=okular
-alias vpnup="sudo wg-quick up wg-SE-DE-1" 
-alias vpndown="sudo wg-quick down wg-SE-DE-1"
+alias vpnup="sudo wg-quick up wg-CH-DE-2" 
+alias vpndown="sudo wg-quick down wg-CH-DE-2"
 alias sysupd="sudo xbps-install -Syu"
 
