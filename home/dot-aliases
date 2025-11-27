@@ -16,5 +16,5 @@ alias ...="cd ../.."
 alias pdf=okular
 alias vpnup="sudo wg-quick up wg-CH-DE-2" 
 alias vpndown="sudo wg-quick down wg-CH-DE-2"
-alias sysupd="sudo xbps-install -Syu"
+alias sysupd="sudo xbps-install -Syu && sudo vkpurge rm all"
 
