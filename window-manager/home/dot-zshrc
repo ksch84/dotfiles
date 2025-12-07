@@ -1,0 +1,38 @@
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+		exec startx &>/dev/null 
+fi 
+
+
+autoload -U compaudit compinit
+source ~/.aliases
+export GOPATH=~/go
+export PATH=$GOPATH/bin:/usr/local/bin:$PATH
+export PF_INFO="ascii os host kernel uptime pkgs shell wm memory"
+export EDITOR="vim"
+export PODMAN_IGNORE_CGROUPSV1_WARNING=true
+
+autoload -Uz add-zsh-hook vcs_info
+setopt prompt_subst
+add-zsh-hook precmd vcs_info
+
+PROMPT=' %(?.%F{blue}.%F{red}) %F{red}%n%f %B%F{cyan}%3~%f%b ${vcs_info_msg_0_} '
+# Sequences:
+#
+# %b current branch
+# %u unstaged changes
+# %c staged changes 
+# %a current Git action (rebase, merge etc.)
+#
+# vcs_info should ckeck for changes
+zstyle ':vcs_info:*' check-for-changes true
+# unstaged format 
+zstyle ':vcs_info:*' unstagedstr ' %F{red}(unstaged) %f'
+# staged format
+zstyle ':vcs_info:*' stagedstr ' %F{green}(staged) %f'
+# git prompt format
+zstyle ':vcs_info:git:*' formats   '%F{green} %b%f%u%c'
+# git prompt action (rebase etc.) format
+zstyle ':vcs_info:git:*' actionformats '[%b]|%a%u%c'
+
+# Bind CTRL - F to fzf
+bindkey -s '^F' 'fzf^M'
