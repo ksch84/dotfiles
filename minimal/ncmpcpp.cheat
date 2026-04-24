@@ -1,0 +1,230 @@
+.TH NCMPCPP 7 "December 2024" "ncmpcpp cheat sheet" "ncmpcpp shortcuts"
+.SH NAME
+ncmpcpp \- Cheat sheet for common ncmpcpp commands
+.SH DESCRIPTION
+This man page provides a quick reference for common keyboard shortcuts and commands in ncmpcpp, a ncurses-based MPD client.
+.SH CONTENTS
+.PP
+1. Navigation
+2. Playback Control
+3. Playlist Management
+4. Browser
+5. Search
+6. Visualizer
+7. Help & Quit
+.SH NAVIGATION
+.TP
+.B 1-9
+Jump to playlist 1-9
+.TP
+.B 0
+Jump to playlist 10
+.TP
+.B g
+Go to currently playing song
+.TP
+.B G
+Go to first song in playlist
+.TP
+.B j / Down Arrow
+Move down in list
+.TP
+.B k / Up Arrow
+Move up in list
+.TP
+.B Page Up / Page Down
+Scroll playlist page up/down
+.TP
+.B Home
+Go to beginning of current list
+.TP
+.B End
+Go to end of current list
+.SH PLAYBACK CONTROL
+.TP
+.B > / Space
+Play selected song / Toggle play/pause
+.TP
+.B p
+Toggle play/pause
+.TP
+.B s
+Stop playback
+.TP
+.B n
+Next track
+.TP
+.B N
+Previous track
+.TP
+.B f
+Fast forward
+.TP
+.B b
+Rewind
+.TP
+.B r
+Toggle repeat mode
+.TP
+.B z
+Toggle random mode
+.TP
+.B S
+Single mode (play once then stop)
+.TP
+.B t
+Toggle consume mode
+.TP
+.B [
+Decrease volume by 1%
+.TP
+.B ]
+Increase volume by 1%
+.TP
+.B {
+Decrease volume by 5%
+.TP
+.B }
+Increase volume by 5%
+.TP
+.B :
+Seek forward in current track
+.TP
+.B ;
+Seek backward in current track
+.SH PLAYLIST MANAGEMENT
+.TP
+.B a
+Add file/folder to playlist
+.TP
+.B A
+Add random songs to playlist
+.TP
+.B d
+Remove selected item from playlist
+.TP
+.B D
+Clear entire playlist
+.TP
+.B c
+Crop playlist (keep only selected items)
+.TP
+.B m
+Move selected item in playlist
+.TP
+.B M
+Move multiple items in playlist
+.TP
+.B y
+Yank (copy) selected items
+.TP
+.B P
+Paste yanked items
+.TP
+.B R
+Replace playlist with selected item
+.TP
+.B o
+Toggle between playlist and output modes
+.TP
+.B q
+Save current playlist
+.TP
+.B Q
+Load playlist
+.TP
+.B w
+Swap positions of selected items
+.SH BROWSER
+.TP
+.B Right / Enter
+Enter directory / Add to playlist
+.TP
+.B Left / Backspace
+Go to parent directory
+.TP
+.B /
+Start incremental search in browser
+.TP
+.B ~
+Toggle between file list and tag editor
+.TP
+.B e
+Toggle between file list and playlist
+.TP
+.B i
+Show song information
+.TP
+.B I
+Show artist information
+.TP
+.B l
+Toggle lyrics
+.TP
+.B L
+Lock screen (show clock)
+.SH SEARCH
+.TP
+.B :
+Start command line (use / for search prefix)
+.TP
+.B / (in command line)
+Search in current context
+.TP
+.B c (in command line)
+Clear search
+.TP
+.B x
+Start tag editor
+.SH VISUALIZER
+.TP
+.B @
+Toggle visualizer
+.TP
+.B v
+Cycle through visualizer types
+.TP
+.B + / =
+Increase visualizer FPS
+.TP
+.B - / _
+Decrease visualizer FPS
+.SH HELP & QUIT
+.TP
+.B ?
+Show help screen
+.TP
+.B ? (twice)
+Show keybindings
+.TP
+.B Tab
+Switch between current screen and help
+.TP
+.B Quit
+Quit ncmpcpp
+.SH EXAMPLES
+.PP
+.IP ""
+To search for an artist:
+.BR 1. " Press /"
+.BR 2. " Type "artist: Artist Name""
+.BR 3. " Press Enter"
+.PP
+.IP ""
+To create a playlist:
+.BR 1. " Browse to songs (Right/Enter)"
+.BR 2. " Add to playlist (a)"
+.BR 3. " Save playlist (q, then enter name)"
+.PP
+.SH FILES
+.PP
+Configuration file: ~/.config/ncmpcpp/config
+.PP
+Lyrics directory: ~/.config/ncmpcpp/lyrics
+.SH SEE ALSO
+.PP
+.BR mpd (1),
+.BR ncmpcpp (1)
+.SH AUTHOR
+.PP
+This cheat sheet was created for use with ncmpcpp and MPD.

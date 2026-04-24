@@ -1,12 +1,15 @@
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 		exec startx &>/dev/null 
-fi 
+fi
 
+# Start mpd daemon (only if not running)
+pgrep -x mpd >/dev/null || mpd &
 
 autoload -U compaudit compinit
 source ~/.aliases
 export GOPATH=~/go
 export PATH=$GOPATH/bin:/usr/local/bin:$PATH
+export MANPATH=${MANPATH:-}:$HOME/.local/share/man
 export PF_INFO="ascii os host kernel uptime pkgs shell wm memory"
 export EDITOR="vim"
 export PODMAN_IGNORE_CGROUPSV1_WARNING=true
@@ -36,3 +39,5 @@ zstyle ':vcs_info:git:*' actionformats '[%b]|%a%u%c'
 
 # Bind CTRL - F to fzf
 bindkey -s '^F' 'fzf^M'
+
+. "$HOME/.local/bin/env"

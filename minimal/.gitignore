@@ -1,0 +1,8 @@
+# MPD runtime files
+*.pid
+*.db
+*.log
+*.state
+
+# ncmpcpp runtime files
+*.log
