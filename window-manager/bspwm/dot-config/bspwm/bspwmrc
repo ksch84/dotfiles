@@ -3,7 +3,8 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 ~/.config/polybar/launch.sh &
-nitrogen --restore &
+nitrogen --set-scaled ~/.config/backgrounds/forest.jpg &
+xsetroot -cursor_name left_ptr &
 xrdb -load ~/.Xresources
 picom &
 

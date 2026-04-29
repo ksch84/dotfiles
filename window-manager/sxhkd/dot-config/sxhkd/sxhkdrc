@@ -6,14 +6,14 @@
 super + Return
 	urxvt
 super + b
-	$HOME/mullvad-browser/Browser/start-mullvad-browser
+	/usr/lib/mullvad-browser/start-mullvad-browser
 
 super + p
 	scrot
 
 # program launcher
-super + @space
-	rofi -show run
+super + space
+	rofi -show drun
 
 # make sxhkd reload its configuration files:
 super + Escape
