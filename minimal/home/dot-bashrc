@@ -2,12 +2,9 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 		exec startx &>/dev/null 
 fi
 
-# Start mpd daemon (only if not running)
-pgrep -x mpd >/dev/null || mpd &
-
 source ~/.aliases
 export GOPATH=~/go
-export PATH=$GOPATH/bin:/usr/local/bin:$PATH
+export PATH=$GOPATH/bin:/usr/local/bin:/sbin:/usr/sbin:$PATH
 export MANPATH=${MANPATH:-}:$HOME/.local/share/man
 export PF_INFO="ascii os host kernel uptime pkgs shell wm memory"
 export EDITOR="vim"
@@ -20,11 +17,19 @@ elif [ -f /etc/bash_completion.d/git ]; then
     source /etc/bash_completion.d/git
 fi
 
+# Color definitions for bash (wrapped in \[ \] for prompt)
+RED='\[\033[0;31m\]'
+GREEN='\[\033[0;32m\]'
+BLUE='\[\033[0;34m\]'
+CYAN='\[\033[0;36m\]'
+BOLD='\[\033[1m\]'
+RESET='\[\033[0m\]'
+
 # Truncate pwd to last 3 components (like zsh %3~)
 function truncate_pwd() {
     local pwd=$PWD
     local home=$HOME
-    # Replace HOME with ~ (use printf to prevent tilde expansion)
+    # Replace HOME with ~
     if [[ $pwd == "$home" ]]; then
         pwd=$(printf '~')
     elif [[ $pwd == "$home"/* ]]; then
@@ -47,23 +52,34 @@ function truncate_pwd() {
 
 # Git info for prompt (match zsh vcs_info behavior)
 function parse_git_info() {
-    local ref unstaged staged
+    local ref
     ref=$(git symbolic-ref --short HEAD 2>/dev/null)
     [[ -z "$ref" ]] && return
     
-    local git_str="%F{green} ${ref}%f"
+    local git_str="$GREEN $ref$RESET"
+    local has_unstaged=false
+    local has_staged=false
     
-    local status=$(git status --porcelain 2>/dev/null)
-    if [[ -n "$status" ]]; then
-        if echo "$status" | grep -qE '^[ MADRC]'; then
-            git_str+=" %F{red}(unstaged)%f"
+    while IFS= read -r line; do
+        [[ -z "$line" ]] && continue
+        # First char = index status, second char = working tree status
+        local index_status="${line:0:1}"
+        local wt_status="${line:1:1}"
+        
+        # Staged changes: index has changes (MADRC)
+        if [[ "$index_status" =~ [MADRC] ]]; then
+            has_staged=true
         fi
-        if echo "$status" | grep -qE '^.[MTDARC]'; then
-            git_str+=" %F{green}(staged)%f"
+        # Unstaged changes: working tree has changes (MTDARC)
+        if [[ "$wt_status" =~ [MTDARC] ]]; then
+            has_unstaged=true
         fi
-    fi
+    done <<< "$(git status --porcelain 2>/dev/null)"
     
-    echo " ${git_str}"
+    [[ "$has_unstaged" = true ]] && git_str+=" $RED(unstaged)$RESET"
+    [[ "$has_staged" = true ]] && git_str+=" $GREEN(staged)$RESET"
+    
+    echo " $git_str"
 }
 
 function set_bash_prompt() {
@@ -71,13 +87,13 @@ function set_bash_prompt() {
     local symbol user dir git_info
     
     if [ $exit_code -eq 0 ]; then
-        symbol="%F{blue}%f"
+        symbol="$BLUE$RESET"
     else
-        symbol="%F{red}%f"
+        symbol="$RED$RESET"
     fi
     
-    user="%F{red}\u%f"
-    dir="%B%F{cyan}$(truncate_pwd)%f%b"
+    user="$RED\u$RESET"
+    dir="$BOLD$CYAN$(truncate_pwd)$RESET"
     git_info=$(parse_git_info)
     
     PS1="$symbol $user $dir$git_info "

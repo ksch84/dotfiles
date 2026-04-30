@@ -1,6 +1,7 @@
 # Dotfiles
 
-Usage:
+## Usage
+
 - `make` or `make minimal` — install minimal dotfiles
 - `make window-manager` — install window manager configs
 - `make full` — install both minimal and window manager

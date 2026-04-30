@@ -2,8 +2,7 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 		exec startx &>/dev/null 
 fi
 
-# Start mpd daemon (only if not running)
-pgrep -x mpd >/dev/null || mpd &
+
 
 autoload -U compaudit compinit
 source ~/.aliases
