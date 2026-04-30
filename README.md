@@ -1,5 +1,9 @@
 # Dotfiles
 
-Usage: Go to the ``minimal`` directory and execute ``make`` to install and ``make delete`` to uninstall dotfiles. For a window-manager only setup also execute make inside the ``window-manager`` directory.
+Usage:
+- `make` or `make minimal` — install minimal dotfiles
+- `make window-manager` — install window manager configs
+- `make full` — install both minimal and window manager
+- `make delete` — remove all installed dotfiles
 
 ![screen](./screenshot.jpg)
