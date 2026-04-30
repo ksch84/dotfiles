@@ -1,0 +1,93 @@
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+		exec startx &>/dev/null 
+fi
+
+# Start mpd daemon (only if not running)
+pgrep -x mpd >/dev/null || mpd &
+
+source ~/.aliases
+export GOPATH=~/go
+export PATH=$GOPATH/bin:/usr/local/bin:$PATH
+export MANPATH=${MANPATH:-}:$HOME/.local/share/man
+export PF_INFO="ascii os host kernel uptime pkgs shell wm memory"
+export EDITOR="vim"
+export PODMAN_IGNORE_CGROUPSV1_WARNING=true
+
+# Load git completion
+if [ -f /usr/share/bash-completion/completions/git ]; then
+    source /usr/share/bash-completion/completions/git
+elif [ -f /etc/bash_completion.d/git ]; then
+    source /etc/bash_completion.d/git
+fi
+
+# Truncate pwd to last 3 components (like zsh %3~)
+function truncate_pwd() {
+    local pwd=$PWD
+    local home=$HOME
+    # Replace HOME with ~ (use printf to prevent tilde expansion)
+    if [[ $pwd == "$home" ]]; then
+        pwd=$(printf '~')
+    elif [[ $pwd == "$home"/* ]]; then
+        pwd=$(printf '~/%s' "${pwd#$home/}")
+    fi
+    # Split into components and get last 3
+    local IFS="/"
+    local -a parts
+    read -ra parts <<< "$pwd"
+    local num_parts=${#parts[@]}
+    local start=$(( num_parts > 3 ? num_parts - 3 : 0 ))
+    local result=""
+    for ((i=start; i<num_parts; i++)); do
+        [[ $i -gt $start ]] && result+="/"
+        result+=${parts[$i]}
+    done
+    [[ -z "$result" ]] && result="/"
+    echo "$result"
+}
+
+# Git info for prompt (match zsh vcs_info behavior)
+function parse_git_info() {
+    local ref unstaged staged
+    ref=$(git symbolic-ref --short HEAD 2>/dev/null)
+    [[ -z "$ref" ]] && return
+    
+    local git_str="%F{green} ${ref}%f"
+    
+    local status=$(git status --porcelain 2>/dev/null)
+    if [[ -n "$status" ]]; then
+        if echo "$status" | grep -qE '^[ MADRC]'; then
+            git_str+=" %F{red}(unstaged)%f"
+        fi
+        if echo "$status" | grep -qE '^.[MTDARC]'; then
+            git_str+=" %F{green}(staged)%f"
+        fi
+    fi
+    
+    echo " ${git_str}"
+}
+
+function set_bash_prompt() {
+    local exit_code=$?
+    local symbol user dir git_info
+    
+    if [ $exit_code -eq 0 ]; then
+        symbol="%F{blue}%f"
+    else
+        symbol="%F{red}%f"
+    fi
+    
+    user="%F{red}\u%f"
+    dir="%B%F{cyan}$(truncate_pwd)%f%b"
+    git_info=$(parse_git_info)
+    
+    PS1="$symbol $user $dir$git_info "
+}
+
+PROMPT_COMMAND=set_bash_prompt
+
+# Bind CTRL-F to fzf
+if command -v fzf &>/dev/null; then
+    bind '"\C-f": "fzf\C-m"'
+fi
+
+. "$HOME/.local/bin/env"

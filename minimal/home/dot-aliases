@@ -12,3 +12,17 @@ alias l="ls -la"
 alias top="htop"
 alias ..="cd .."
 alias ...="cd ../.."
+
+# Power commands with confirmation
+restart() {
+    read -r -p "Are you sure you want to restart? [y/N] " response
+    [[ "$response" =~ ^[Yy]$ ]] && sudo loginctl reboot
+}
+reboot() {
+    read -r -p "Are you sure you want to reboot? [y/N] " response
+    [[ "$response" =~ ^[Yy]$ ]] && sudo loginctl reboot
+}
+shutdown() {
+    read -r -p "Are you sure you want to shutdown? [y/N] " response
+    [[ "$response" =~ ^[Yy]$ ]] && sudo loginctl poweroff
+}

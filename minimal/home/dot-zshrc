@@ -8,7 +8,7 @@ pgrep -x mpd >/dev/null || mpd &
 autoload -U compaudit compinit
 source ~/.aliases
 export GOPATH=~/go
-export PATH=$GOPATH/bin:/usr/local/bin:$PATH
+export PATH=$GOPATH/bin:/usr/local/bin:/sbin:/usr/sbin:$PATH
 export MANPATH=${MANPATH:-}:$HOME/.local/share/man
 export PF_INFO="ascii os host kernel uptime pkgs shell wm memory"
 export EDITOR="vim"
