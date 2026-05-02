@@ -197,7 +197,7 @@ function write_message {
 }
 
 function print_selection {
-    echo "$1"
+    printf "%s" "$1"
 }
 
 declare -A messages
@@ -215,7 +215,8 @@ confirmationMessages[cancel]=$(write_message "${icons[cancel]}" "No, cancel")
 if [ $# -gt 0 ]
 then
     # If arguments given, use those as the selection
-    selection="${@}"
+    # Strip trailing newlines
+    selection="${@%$'\n'}"
 else
     # Otherwise, use the CLI passed choice if given
     if [ -n "${selectionID+x}" ]
