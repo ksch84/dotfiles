@@ -65,6 +65,17 @@ if [ "$MODE" = "full" ] || [ "$MODE" = "window-manager" ]; then
     echo ""
     echo "[3/3] Installing window manager dependencies..."
     apt install -y "${WM_PKGS[@]}"
+
+    # Free sxhkd bindings grabbed by ibus (super + space, super + period)
+    if [ -n "$SUDO_USER" ] && command -v gsettings &> /dev/null \
+        && gsettings list-schemas | grep -qx org.freedesktop.ibus.general.hotkey; then
+        echo ""
+        echo "[ibus] Releasing super + space and super + period for sxhkd..."
+        sudo -H -u "$SUDO_USER" dbus-run-session sh -c '
+            gsettings set org.freedesktop.ibus.general.hotkey triggers "[]"
+            gsettings set org.freedesktop.ibus.panel.emoji hotkey "[\"<Super>semicolon\"]"
+        '
+    fi
 fi
 
 # Clean up
