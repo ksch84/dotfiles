@@ -4,7 +4,8 @@ fi
 
 
 
-autoload -U compaudit compinit
+# enable tab completion (autoload only loads compinit, it must also be run)
+autoload -Uz compinit && compinit
 source ~/.aliases
 export GOPATH=~/go
 export PATH=$GOPATH/bin:/usr/local/bin:/sbin:/usr/sbin:$PATH
@@ -39,4 +40,5 @@ zstyle ':vcs_info:git:*' actionformats '[%b]|%a%u%c'
 # Bind CTRL - F to fzf
 bindkey -s '^F' 'fzf^M'
 
-. "$HOME/.local/bin/env"
+# only load it if it exists, so new machines without it show no error
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"

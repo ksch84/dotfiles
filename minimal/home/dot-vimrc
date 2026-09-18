@@ -14,7 +14,7 @@ filetype indent on
 call plug#begin('~/.vim/plugged')
  Plug 'tpope/vim-fugitive'  
  Plug 'tpope/vim-commentary'  
- Plug 'scrooloose/nerdtree'
+ Plug 'preservim/nerdtree'
  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
  Plug 'junegunn/fzf.vim'
  Plug 'junegunn/goyo.vim'
@@ -22,7 +22,6 @@ call plug#begin('~/.vim/plugged')
  Plug 'sainnhe/vim-color-forest-night'
 call plug#end()
 
-let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 
 nnoremap <C-n> :NERDTreeToggle<CR>

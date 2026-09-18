@@ -14,9 +14,9 @@ alias ..="cd .."
 alias ...="cd ../.."
 
 # Power commands with confirmation
+# restart is just another name for reboot
 restart() {
-    read -r -p "Are you sure you want to restart? [y/N] " response
-    [[ "$response" =~ ^[Yy]$ ]] && sudo loginctl reboot
+    reboot
 }
 reboot() {
     read -r -p "Are you sure you want to reboot? [y/N] " response

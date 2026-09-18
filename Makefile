@@ -1,4 +1,4 @@
-.PHONY: all minimal window-manager full delete deps wm-deps full-deps
+.PHONY: all minimal window-manager full delete deps wm-deps full-deps link link-minimal link-window-manager
 
 all: minimal
 
@@ -12,14 +12,22 @@ wm-deps:
 
 full-deps: deps wm-deps
 
-minimal: deps
+# minimal / window-manager / full: install the packages (needs sudo), then link.
+# link*: only (re)link the config files, no sudo and no apt. Use these after
+# editing or adding dotfiles.
+minimal: deps link-minimal
+
+# --no-folding (used by stow below): link single files instead of whole
+# folders, so programs that write into ~/.config/<app> (e.g. caches) do not
+# write into this repo
+link-minimal:
 	mkdir -p ~/.config/backgrounds
 	mkdir -p ~/.config/mpd
 	mkdir -p ~/.config/mpd/playlists
 	mkdir -p ~/.config/ncmpcpp
 	mkdir -p ~/.local/share/man/man7
 	mkdir -p ~/.config/systemd/user
-	cd minimal && stow -v --restow --dotfiles --ignore='\.jpg' --target $$HOME home
+	cd minimal && stow -v --restow --no-folding --dotfiles --ignore='\.jpg' --target $$HOME home
 	cd minimal && stow -v --restow --target ~/.config/backgrounds backgrounds
 	ln -sf $(CURDIR)/minimal/mpd/mpd.conf ~/.config/mpd/mpd.conf
 	ln -sf $(CURDIR)/minimal/ncmpcpp/config ~/.config/ncmpcpp/config
@@ -28,10 +36,14 @@ minimal: deps
 	systemctl --user daemon-reload
 	systemctl --user enable --now mpd
 
-window-manager: wm-deps
-	cd window-manager && stow -v --restow --dotfiles --ignore='\.jpg' --target $$HOME */
+window-manager: wm-deps link-window-manager
 
-full: full-deps minimal window-manager
+link-window-manager:
+	cd window-manager && stow -v --restow --no-folding --dotfiles --ignore='\.jpg' --target $$HOME */
+
+link: link-minimal link-window-manager
+
+full: full-deps link
 
 delete:
 	[ -d ~/.config/backgrounds ] && cd minimal && stow -v --delete --target ~/.config/backgrounds backgrounds 2>/dev/null; true

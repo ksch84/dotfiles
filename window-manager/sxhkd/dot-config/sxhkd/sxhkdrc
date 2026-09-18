@@ -5,13 +5,21 @@
 # terminal emulator
 super + Return
 	urxvt
+
+# web browser (super + w, because super + b is used below to focus
+# the sibling window)
 super + w
 	/usr/lib/mullvad-browser/start-mullvad-browser
 
+# screenshot (Print key, because super + p is used below to focus
+# the parent window)
 Print
 	scrot
 
 # program launcher
+# note: ibus also wants super + space (to switch input languages) and
+# takes it first, so it never reaches this line. install.sh turns that
+# ibus shortcut off; run `ibus restart` if it has come back
 super + space
 	rofi -show run
 
@@ -72,10 +80,13 @@ super + {_,shift + }c
 	bspc node -f {next,prev}.local.!hidden.window
 
 # focus the next/previous desktop in the current monitor
+# (ü and + are where [ and ] sit on a US keyboard; the German layout
+# has no separate [ and ] keys)
 super + {udiaeresis,plus}
 	bspc desktop -f {prev,next}.local
 
 # focus the last node/desktop
+# (^ is the key left of 1, where ` sits on a US keyboard)
 super + {dead_circumflex,Tab}
 	bspc {node,desktop} -f last
 

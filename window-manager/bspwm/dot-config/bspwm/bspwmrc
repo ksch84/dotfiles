@@ -3,12 +3,17 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 ~/.config/polybar/launch.sh &
-nitrogen --set-scaled ~/.config/backgrounds/forest.jpg &
+# set the wallpaper: fit the whole picture on the screen, black bars if the
+# shape does not match. For a full-screen crop use --bg-fill instead of --bg-max
+feh --bg-max --image-bg black ~/.config/backgrounds/forest.jpg &
 xsetroot -cursor_name left_ptr &
-xrdb -load ~/.Xresources
 picom &
+# lock the screen (i3lock) when the session gets locked, e.g. by the
+# "Lock" entry of the power menu; without this nothing would lock
+xss-lock --transfer-sleep-lock -- i3lock --nofork --color=232a2e &
 
-bspc monitor -d 1 2 3 4 5
+# 10 desktops: sxhkd has keys for desktops 1-10 (super + 1..9 and 0)
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
 bspc config border_width         3
 bspc config window_gap          35
