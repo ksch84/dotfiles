@@ -3,9 +3,9 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 ~/.config/polybar/launch.sh &
-# set the wallpaper: fit the whole picture on the screen, black bars if the
-# shape does not match. For a full-screen crop use --bg-fill instead of --bg-max
-feh --bg-max --image-bg black ~/.config/backgrounds/forest.jpg &
+# set the wallpaper: fill the whole screen, cropping the picture if its shape
+# does not match. To fit the whole picture with black bars use --bg-max instead
+feh --bg-fill ~/.config/backgrounds/forest.jpg &
 xsetroot -cursor_name left_ptr &
 picom &
 # lock the screen (i3lock) when the session gets locked, e.g. by the
